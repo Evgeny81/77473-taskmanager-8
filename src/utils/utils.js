@@ -10,7 +10,7 @@ export const getRandomInt = (min = 0, max = 2) => (
   Math.floor(Math.random() * (max + 1 - min)) + min
 );
 
-export const anyOf = function (array, length) {
+export const anyOf = (array, length) => {
   if (length) {
     const selectedValues = new Set();
     while (selectedValues.size < length) {
