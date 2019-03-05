@@ -1,6 +1,5 @@
 export default ({label, count, checked, disabled}) => {
   const lowerCasedLabel = label.toLowerCase();
-
   return `<input
             type="radio"
             id="filter__${lowerCasedLabel}"
