@@ -1,19 +1,28 @@
+import {Task} from './components/Task';
 import {filters as filtersConfig, card as cardConfig} from './config';
-import {cardTemplate, filterTemplate} from './templates';
+import {filterTemplate} from './templates';
 import {getAllElements, getElement, getRandomInt, renderElement} from './utils';
 
-const mainFilter = getElement(`.main__filter`);
-const boardTasks = getElement(`.board__tasks`);
+const mainFilter = getElement(document, `.main__filter`);
+const boardTasks = getElement(document, `.board__tasks`);
 
 const clearBoard = () => {
   boardTasks.innerHTML = ``;
-  renderElement(boardTasks, cardTemplate, cardConfig(getRandomInt(3, 7)));
+  for (let i = 0; i < getRandomInt(3, 7); i++) {
+    const firstTask = new Task(cardConfig());
+    boardTasks.appendChild(firstTask.render());
+  }
 };
 
 renderElement(mainFilter, filterTemplate, filtersConfig);
-renderElement(boardTasks, cardTemplate, cardConfig(7));
 const filterElement = getAllElements(`.filter input`);
 
 Array.from(filterElement).forEach((element) => {
   element.addEventListener(`click`, clearBoard);
 });
+
+for (let i = 0; i < 3; i++) {
+  const firstTask = new Task(cardConfig());
+  boardTasks.appendChild(firstTask.render());
+}
+

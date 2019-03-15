@@ -1,5 +1,5 @@
-export const getElement = (selector) => (
-  document.querySelector(selector)
+export const getElement = (container, selector) => (
+  container.querySelector(selector)
 );
 
 export const getAllElements = (selector) => (
@@ -19,6 +19,12 @@ export const anyOf = (array, length) => {
     return [...selectedValues];
   }
   return array[getRandomInt(0, array.length - 1)];
+};
+
+export const createElement = (template) => {
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+  return newElement.firstChild;
 };
 
 export const renderElement = (parent, element, config = getRandomInt(3, 7)) => {
