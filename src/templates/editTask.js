@@ -4,7 +4,7 @@ import weekDaysTemplate from './weekDays';
 import colorsTemplate from './color';
 
 export default ({title = ``, isRepeating, color = `black`, dueDate, tags, repeatingDays, picture}) => (
-  `<article class="card card--${color} ${isRepeating ? `card--repeat` : ``} ${dueDate < Date.now() ? `card--deadline` : ``}">
+  `<article class="card card--edit card--${color} ${isRepeating ? `card--repeat` : ``} ${dueDate < Date.now() ? `card--deadline` : ``}">
             <form class="card__form" method="get">
               <div class="card__inner">
                 <div class="card__control">
