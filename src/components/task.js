@@ -1,8 +1,8 @@
 import cardTemplate from '../templates/task';
 import {getElement} from '../utils/utils';
-import TaskBaseComponent from './base-task';
+import Component from './component';
 
-export default class Task extends TaskBaseComponent {
+export default class Task extends Component {
   constructor(props) {
     super(props);
     this._element = null;

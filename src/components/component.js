@@ -1,8 +1,8 @@
 import {createElement} from '../utils/utils';
 
-export default class TaskBaseComponent {
+export default class Component {
   constructor(props) {
-    if (new.target === TaskBaseComponent) {
+    if (new.target === Component) {
       throw new Error(`Can't instantiate Component, only concrete one.`);
     }
     this._title = props.title;

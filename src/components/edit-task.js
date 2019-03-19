@@ -1,8 +1,8 @@
 import editTask from '../templates/edit-task';
 import {getElement} from '../utils/utils';
-import TaskBaseComponent from './base-task';
+import Component from './component';
 
-export default class EditTask extends TaskBaseComponent {
+export default class EditTask extends Component {
   constructor(props) {
     super(props);
     this._repeatingDays = props.repeatingDays;
