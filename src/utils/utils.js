@@ -36,7 +36,7 @@ export const renderElement = (parent, element, config = getRandomInt(3, 7)) => {
   }
 };
 
-export const createTask = function (container, config) {
+export const createTask = (container, config) => {
   const task = new Task(config());
   const editTask = new EditTask(config());
   container.appendChild(task.render());
