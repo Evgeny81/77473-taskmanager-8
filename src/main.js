@@ -1,5 +1,5 @@
 import {Task} from './components/task';
-import {EditTask} from './components/editTask';
+import {EditTask} from './components/edit-task';
 import {filters as filtersConfig, card as cardConfig} from './config';
 import filterTemplate from './templates/filter';
 import {getElement, getRandomInt, renderElement} from './utils/utils';

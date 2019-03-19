@@ -1,6 +1,6 @@
-import editTask from '../templates/editTask';
+import editTask from '../templates/edit-task';
 import {getElement} from '../utils/utils';
-import {TaskBaseComponent} from './baseTask';
+import {TaskBaseComponent} from './base-task';
 
 export class EditTask extends TaskBaseComponent {
   constructor(props) {

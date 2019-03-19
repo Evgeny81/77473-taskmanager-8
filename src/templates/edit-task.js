@@ -1,6 +1,6 @@
 import {colors} from '../constants';
 import hashtagTemplate from './hashtag';
-import weekDaysTemplate from './weekDays';
+import weekDaysTemplate from './weekdays';
 import colorsTemplate from './color';
 
 export default ({title = ``, isRepeating, color = `black`, dueDate, tags, repeatingDays, picture}) => (
