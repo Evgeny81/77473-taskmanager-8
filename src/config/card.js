@@ -1,5 +1,5 @@
 import {colors, daysOfWeek} from '../constants';
-import {anyOf, getRandomInt} from '../utils';
+import {anyOf, getRandomInt} from '../utils/utils';
 
 export default () => ({
   title: anyOf([

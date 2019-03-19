@@ -2,10 +2,6 @@ export const getElement = (container, selector) => (
   container.querySelector(selector)
 );
 
-export const getAllElements = (selector) => (
-  document.querySelectorAll(selector)
-);
-
 export const getRandomInt = (min = 0, max = 2) => (
   Math.floor(Math.random() * (max + 1 - min)) + min
 );

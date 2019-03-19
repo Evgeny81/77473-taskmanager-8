@@ -2,7 +2,7 @@ import {Task} from './components/task';
 import {EditTask} from './components/editTask';
 import {filters as filtersConfig, card as cardConfig} from './config';
 import filterTemplate from './templates/filter';
-import {getAllElements, getElement, getRandomInt, renderElement} from './utils';
+import {getElement, getRandomInt, renderElement} from './utils/utils';
 
 const mainFilter = getElement(document, `.main__filter`);
 const tasksContainer = getElement(document, `.board__tasks`);
@@ -16,11 +16,8 @@ const clearBoard = () => {
 };
 
 renderElement(mainFilter, filterTemplate, filtersConfig);
-const filterElement = getAllElements(`.filter input`);
 
-Array.from(filterElement).forEach((element) => {
-  element.addEventListener(`click`, clearBoard);
-});
+mainFilter.addEventListener(`click`, clearBoard);
 
 const task = new Task(cardConfig());
 const editTask = new EditTask(cardConfig());

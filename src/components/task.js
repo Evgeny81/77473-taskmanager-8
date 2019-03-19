@@ -1,40 +1,27 @@
 import cardTemplate from '../templates/task';
-import {createElement, getElement} from '../utils/utils';
+import {getElement} from '../utils/utils';
+import {TaskBaseComponent} from './baseTask';
 
-export class Task {
+export class Task extends TaskBaseComponent {
   constructor(props) {
-    this.title = props.title;
-    this.tags = props.tags;
-    this.picture = props.picture;
-    this.dueDate = props.dueDate;
-    this.repeatingDays = props.repeatingDays;
-    this.isRepeating = props.isRepeating;
-    this.color = props.color;
+    super(props);
     this._element = null;
     this._onEdit = null;
+    this._onEditClick = this._onEditClick.bind(this);
   }
 
   _onEditClick() {
     return typeof this._onEdit === `function` && this._onEdit();
   }
 
-  render() {
-    this._element = createElement(this.template);
-    this._bind();
-    return this._element;
-  }
-
-  _bind() {
+  bind() {
     getElement(this._element, `.card__btn--edit`)
-      .addEventListener(`click`, this._onEditClick.bind(this));
+      .addEventListener(`click`, this._onEditClick);
   }
 
-  get element() {
-    return this._element;
-  }
-
-  unrender() {
-    this._element = null;
+  unbind() {
+    getElement(this._element, `.card__btn--edit`)
+      .removeEventListener(`click`, this._onEditClick);
   }
 
   set onEdit(fn) {
@@ -43,12 +30,12 @@ export class Task {
 
   get template() {
     const {
-      title,
-      color,
-      isRepeating,
-      dueDate,
-      picture,
-      tags
+      _title: title,
+      _color: color,
+      _isRepeating: isRepeating,
+      _dueDate: dueDate,
+      _picture: picture,
+      _tags: tags
     } = this;
     return cardTemplate({title, color, isRepeating, dueDate, picture, tags});
   }
