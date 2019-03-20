@@ -1,9 +1,8 @@
+import EditTask from '../components/edit-task';
+import Task from '../components/task';
+
 export const getElement = (container, selector) => (
   container.querySelector(selector)
-);
-
-export const getAllElements = (selector) => (
-  document.querySelectorAll(selector)
 );
 
 export const getRandomInt = (min = 0, max = 2) => (
@@ -35,4 +34,26 @@ export const renderElement = (parent, element, config = getRandomInt(3, 7)) => {
         element(config[i])
     );
   }
+};
+
+export const createTask = (container, config) => {
+  const task = new Task(config());
+  const editTask = new EditTask(config());
+  container.appendChild(task.render());
+
+  task.onEdit = () => {
+    editTask.render();
+    container.replaceChild(editTask.element, task.element);
+    task.unrender();
+  };
+
+  editTask.onSubmit = () => {
+    task.render();
+    container.replaceChild(task.element, editTask.element);
+    editTask.unrender();
+  };
+};
+
+export const clearBoard = (container) => {
+  container.innerHTML = ``;
 };
