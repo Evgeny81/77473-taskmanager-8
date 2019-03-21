@@ -1,4 +1,4 @@
-import {colors, daysOfWeek} from '../constants';
+import {colors, daysOfWeek} from '../constants/constants';
 import {anyOf, getRandomInt} from '../utils/utils';
 
 export default () => ({

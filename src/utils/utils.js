@@ -1,5 +1,4 @@
-import EditTask from '../components/edit-task';
-import Task from '../components/task';
+import {daysOfWeek} from '../constants/constants';
 
 export const getElement = (container, selector) => (
   container.querySelector(selector)
@@ -36,24 +35,42 @@ export const renderElement = (parent, element, config = getRandomInt(3, 7)) => {
   }
 };
 
-export const createTask = (container, config) => {
-  const task = new Task(config());
-  const editTask = new EditTask(config());
-  container.appendChild(task.render());
-
-  task.onEdit = () => {
-    editTask.render();
-    container.replaceChild(editTask.element, task.element);
-    task.unrender();
-  };
-
-  editTask.onSubmit = () => {
-    task.render();
-    container.replaceChild(task.element, editTask.element);
-    editTask.unrender();
-  };
-};
-
 export const clearBoard = (container) => {
   container.innerHTML = ``;
+};
+
+export const handleFormData = (formData) => {
+  const newData = {
+    title: ``,
+    color: ``,
+    tags: new Set(),
+    repeatingDays: daysOfWeek.reduce((result, current) => {
+      result[current] = false;
+      return result;
+    }, {}),
+    dueDate: null,
+    isRepeating: false
+  };
+  for (const pair of formData) {
+    const [property, value] = pair;
+    switch (property) {
+      case `text`:
+        newData.title = value;
+        break;
+      case `hashtag`:
+        newData.tags.add(value);
+        break;
+      case `color`:
+        newData.color = value;
+        break;
+      case `img`:
+        newData.picture = value;
+        break;
+      case `repeat`:
+        newData.isRepeating = true;
+        newData.repeatingDays[value] = true;
+        break;
+    }
+  }
+  return newData;
 };

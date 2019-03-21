@@ -1,33 +1,39 @@
 import {createElement} from '../utils/utils';
 
 export default class Component {
-  constructor(props) {
+  constructor({title, tags, picture, dueDate, isRepeating, color}) {
     if (new.target === Component) {
       throw new Error(`Can't instantiate Component, only concrete one.`);
     }
-    this._title = props.title;
-    this._tags = props.tags;
-    this._picture = props.picture;
-    this._dueDate = props.dueDate;
-    this._isRepeating = props.isRepeating;
-    this._color = props.color;
+    this._title = title;
+    this._tags = tags;
+    this._picture = picture;
+    this._dueDate = dueDate;
+    this._isRepeating = isRepeating;
+    this._color = color;
     this._element = null;
   }
 
-  bind() {}
+  _bind() {
+    throw new Error(`You have to define bind method.`);
+  }
 
-  unbind() {}
+  _unbind() {
+    throw new Error(`You have to define unbind method.`);
+  }
 
   render() {
     this._element = createElement(this.template);
-    this.bind();
+    this._bind();
     return this._element;
   }
 
   unrender() {
-    this.unbind();
+    this._unbind();
     this._element = null;
   }
+
+  update() {}
 
   get element() {
     return this._element;

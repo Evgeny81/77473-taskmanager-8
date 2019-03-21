@@ -1,9 +1,9 @@
-import {colors} from '../constants';
+import {colors} from '../constants/constants';
 import hashtagTemplate from './hashtag';
 import weekDaysTemplate from './weekdays';
 import colorsTemplate from './color';
 
-export default ({title = ``, isRepeating, color = `black`, dueDate, tags, repeatingDays, picture}) => (
+export default ({title = ``, isRepeating, color = `black`, dueDate, tags, repeatingDays, picture, hasDate, isRepeat}) => (
   `<article class="card card--edit card--${color} ${isRepeating ? `card--repeat` : ``} ${dueDate < Date.now() ? `card--deadline` : ``}">
             <form class="card__form" method="get">
               <div class="card__inner">
@@ -42,10 +42,10 @@ export default ({title = ``, isRepeating, color = `black`, dueDate, tags, repeat
                   <div class="card__details">
                     <div class="card__dates">
                       <button class="card__date-deadline-toggle" type="button">
-                        date: <span class="card__date-status">no</span>
+                        date: <span class="card__date-status">${hasDate ? `yes` : `no`}</span>
                       </button>
 
-                      <fieldset class="card__date-deadline" disabled>
+                      <fieldset class="card__date-deadline" ${!hasDate && `disabled`}>
                         <label class="card__input-deadline-wrap">
                           <input
                             class="card__date"
@@ -65,10 +65,10 @@ export default ({title = ``, isRepeating, color = `black`, dueDate, tags, repeat
                       </fieldset>
 
                       <button class="card__repeat-toggle" type="button">
-                        repeat:<span class="card__repeat-status">no</span>
+                        repeat:<span class="card__repeat-status">${isRepeat ? `yes` : `no`}</span>
                       </button>
 
-                      <fieldset class="card__repeat-days" disabled>
+                      <fieldset class="card__repeat-days" ${!isRepeat && `disabled`}>
                         <div class="card__repeat-days-inner">
                           ${Object.keys(repeatingDays).map((day) => weekDaysTemplate(day, repeatingDays[day])).join(``)}
                         </div>

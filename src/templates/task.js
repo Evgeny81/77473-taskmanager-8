@@ -1,3 +1,4 @@
+import moment from 'moment';
 import hashtagTemplate from './hashtag';
 
 export default ({title = ``, isRepeating, color = `black`, dueDate, tags, picture}) => (
@@ -37,9 +38,10 @@ export default ({title = ``, isRepeating, color = `black`, dueDate, tags, pictur
 
                 <div class="card__settings">
                   <div class="card__details">
+                    <div class="card__dates">${dueDate ? moment(dueDate).format(`DD MMMM HH:mm`) : ``}</div>
                     <div class="card__hashtag">
                       <div class="card__hashtag-list">
-                        ${tags.map((tag) => hashtagTemplate(tag)).join(``)}                        
+                        ${tags.map((tag) => hashtagTemplate(tag)).join(``)}                      
                       </div>
                     </div>
                   </div>

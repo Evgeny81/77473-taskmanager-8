@@ -1,27 +1,37 @@
 import cardTemplate from '../templates/task';
-import {getElement} from '../utils/utils';
+import {getElement, handleFormData} from '../utils/utils';
 import Component from './component';
 
 export default class Task extends Component {
-  constructor(props) {
-    super(props);
+  constructor(data) {
+    super(data);
     this._element = null;
     this._onEdit = null;
     this._onEditClick = this._onEditClick.bind(this);
   }
 
   _onEditClick() {
-    return typeof this._onEdit === `function` && this._onEdit();
+    const formData = new FormData(this._element.querySelector(`.card__form`));
+    return typeof this._onEdit === `function` && this._onEdit(handleFormData(formData));
   }
 
-  bind() {
+  _bind() {
     getElement(this._element, `.card__btn--edit`)
       .addEventListener(`click`, this._onEditClick);
   }
 
-  unbind() {
+  _unbind() {
     getElement(this._element, `.card__btn--edit`)
       .removeEventListener(`click`, this._onEditClick);
+  }
+
+  update({title, tags, picture, dueDate, isRepeating, color}) {
+    this._title = title;
+    this._tags = [...tags];
+    this._picture = picture;
+    this._dueDate = dueDate;
+    this._isRepeating = isRepeating;
+    this._color = color;
   }
 
   set onEdit(fn) {
