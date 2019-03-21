@@ -63,7 +63,7 @@ export const handleFormData = (formData) => {
       case `color`:
         newData.color = value;
         break;
-      case `img`:
+      case `picture`:
         newData.picture = value;
         break;
       case `repeat`:

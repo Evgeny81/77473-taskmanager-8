@@ -20,7 +20,9 @@ export default class EditTask extends Component {
 
   _onSubmitButtonClick(evt) {
     evt.preventDefault();
-    const formData = new FormData(this._element.querySelector(`.card__form`));
+    const formData = new FormData(getElement(this._element, `.card__form`));
+    const imageSrc = getElement(this._element, `.card__img`).getAttribute(`src`);
+    formData.append(`picture`, imageSrc);
     return typeof this._onSubmit === `function` && this._onSubmit(handleFormData(formData));
   }
 
