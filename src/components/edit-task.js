@@ -10,7 +10,7 @@ export default class EditTask extends Component {
     this._element = null;
     this._onSubmit = null;
     this._state = {
-      hasDate: false,
+      hasDate: Boolean(data.dueDate),
       isRepeat: data.isRepeating
     };
     this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
@@ -43,8 +43,10 @@ export default class EditTask extends Component {
       .addEventListener(`click`, this._onDateToggleButtonClick);
     getElement(this._element, `.card__repeat-toggle`)
       .addEventListener(`click`, this._onRepeatToggleButtonClick);
-    flatpickr(`.card__date`, {altInput: true, altFormat: `j F`, dateFormat: `j F`});
-    flatpickr(`.card__time`, {enableTime: true, noCalendar: true, altInput: true, time_24hr: true}); // eslint-disable-line camelcase
+    if (this._state.hasDate) {
+      flatpickr(getElement(this._element, `.card__date`), {altInput: true, altFormat: `j F`, dateFormat: `Y-m-d`});
+      flatpickr(getElement(this._element, `.card__time`), {enableTime: true, noCalendar: true, altInput: true, time_24hr: true}); // eslint-disable-line camelcase
+    }
   }
 
   _unbind() {
@@ -54,6 +56,12 @@ export default class EditTask extends Component {
       .removeEventListener(`click`, this._onDateToggleButtonClick);
     getElement(this._element, `.card__repeat-toggle`)
       .removeEventListener(`click`, this._onRepeatToggleButtonClick);
+    const calendars = document.querySelectorAll(`.flatpickr-calendar`);
+    if (calendars) {
+      for (const element of calendars) {
+        element.parentNode.removeChild(element);
+      }
+    }
   }
 
   update({title}) {
